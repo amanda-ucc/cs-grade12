@@ -1,3 +1,19 @@
+/*
+ * Project Name: Perpetual Accelerated Motion
+ * Author: Amanda Uccello
+ * Date: December 2024
+ * Course: Computer Science
+ * Teacher: Ms. Kim
+ * Description: A game where the player controls a ball with the arrow keys 
+ * to collect points by colliding with other balls while avoiding obstacles. 
+ * The game is set in a 2D environment with physics-based motion. 
+ * The player has 60 seconds to get as many points as possible. 
+ * The game features three levels with different obstacles and 
+ * ball configurations. The game is built using JavaFX and Java.
+ * 
+ * App Class is the main class that runs the game. It contains the start method
+ */
+
 package com.amanda;
 
 import javafx.animation.AnimationTimer;
@@ -5,9 +21,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -32,7 +46,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 
-import java.io.IOException;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +63,7 @@ public class App extends Application {
     private CircularObstacle circleObstacleC = new CircularObstacle(500, 320, 15, 3, 3, Color.BROWN);
     private GraphicsContext gc;
     static private Canvas canvas;
-    static private Scene scene;
+
     private long lastUpdate = 0; // Used to slow down the timer
     private int score = 0;
     Label scoreLabel = new Label("Score: " + score);
@@ -59,16 +72,19 @@ public class App extends Application {
     private Timeline countdownTimeline;
     Label instructionLabel = new Label("An object in motion stay in motion unless acted upon by the keyboard");
 
+    // Main method
     public static void main(String[] args) {
         launch(args);
     }
 
+    // Start method for the game
     @Override
     public void start(Stage primaryStage) {
 
         switchToNavScene(primaryStage);
     }
 
+    // Sets up the Navigation Scene
     private void switchToNavScene(Stage stage) {
         VBox navRoot = new VBox();
         
@@ -92,7 +108,6 @@ public class App extends Application {
             }
         );
         
-
         // Set action for helpItem
         helpItem.setOnAction(
             e -> {
@@ -153,12 +168,12 @@ public class App extends Application {
         // Add MenuBar and buttonPane to the VBox
         navRoot.getChildren().addAll(menuBar, buttonPane);
 
-        // navRoot.getChildren().addAll(menuBar, map1Button, map2Button, map3Button);
         stage.setScene(navScene);
         stage.setTitle("Perpetual Accelerated Motion");
         stage.show();
     }
 
+    // Switches to the Game Scene
     private void switchToGameScene(Stage stage) {
 
         BorderPane root = new BorderPane();
@@ -282,6 +297,7 @@ public class App extends Application {
             }
         });
 
+        // Game loop
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -298,12 +314,14 @@ public class App extends Application {
         startCountdownTimer();     
     }
 
+    // Helper to determine if the mouse is inside the ball
     private boolean isInsideBall(double mouseX, double mouseY) {
         double dx = mouseX - ball.getX();
         double dy = mouseY - ball.getY();
         return dx * dx + dy * dy <= ball.getRadius() * ball.getRadius();
     }
 
+    // Load map1
     private void loadMap1() {
 
         ball = new Ball(250, 250, 15, 2, 2, 6);
@@ -314,6 +332,7 @@ public class App extends Application {
 
     }
 
+    // Load map2
     private void loadMap2() {
         ball = new Ball(250, 250, 15, 2, 2, 6);
 
@@ -324,6 +343,7 @@ public class App extends Application {
 
     }
 
+    // Load map3
     private void loadMap3() {
         ball = new Ball(250, 250, 15, 2, 2, 6);
 
@@ -334,6 +354,7 @@ public class App extends Application {
 
     }
 
+    // Update the position of the ball and obstacles and determines collisions
     private void updatePosition() {
 
         ball.setX(ball.getX() + ball.getDx());
@@ -544,6 +565,7 @@ public class App extends Application {
 
     }
 
+    // Render the game objects
     private void render(GraphicsContext gc) {
         // Clear canvas
         gc.setFill(Color.WHITE);
@@ -561,6 +583,7 @@ public class App extends Application {
         }
     }
 
+    // Start the countdown timer
     private void startCountdownTimer() {
         countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             timeRemaining--;
@@ -580,6 +603,7 @@ public class App extends Application {
         countdownTimeline.play();
     }
 
+    // Show a message when the game ends
     private void showEndOfGameMessage() {
         Platform.runLater(() -> {
             // Show a message or switch scenes when the game ends
@@ -590,15 +614,6 @@ public class App extends Application {
             alert.showAndWait();
             switchToNavScene((Stage) canvas.getScene().getWindow());
         });
-    }
-
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
     }
 
 }
