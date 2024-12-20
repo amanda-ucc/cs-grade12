@@ -10,16 +10,25 @@
 package com.amanda.Obstacles;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class RectObstacle extends AbstractObstacle {
     private double width, height; // Width and height of the rectangle
+    private Image image; // Image of the rectangle
 
     // Constructors
     public RectObstacle(double x, double y, double width, double height) {
         super(x, y);
         this.width = width;
         this.height = height;
+    }
+
+    public RectObstacle(double x, double y, double width, double height, String imagePath) {
+        super(x, y);
+        this.width = width;
+        this.height = height;
+        this.image = new Image(getClass().getResourceAsStream(imagePath));
     }
 
     // Getters and Setters
@@ -51,8 +60,12 @@ public class RectObstacle extends AbstractObstacle {
     // Render the Rectangles that represent the map obstacles
     @Override
     public void render(GraphicsContext gc) {
-        gc.setFill(Color.GRAY);
-        gc.fillRect(x, y, width, height);
+        if (image != null) {
+            gc.drawImage(image, x, y, width, height);
+        } else {
+            gc.setFill(Color.GRAY);
+            gc.fillRect(x, y, width, height);
+        }
     }
     
 }

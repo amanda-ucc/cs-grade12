@@ -31,7 +31,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -47,6 +55,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 
 import javafx.util.Duration;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +72,8 @@ public class App extends Application {
     private CircularObstacle circleObstacleC = new CircularObstacle(500, 320, 15, 3, 3, Color.BROWN);
     private GraphicsContext gc;
     static private Canvas canvas;
-
+    private String wallImgUrl = "/com/amanda/wall.jpg";
+    private String backgroundImgUrl = "/com/amanda/background.jpg";
     private long lastUpdate = 0; // Used to slow down the timer
     private int score = 0;
     Label scoreLabel = new Label("Score: " + score);
@@ -208,8 +218,18 @@ public class App extends Application {
         
         topPane.getChildren().addAll(backButton, instructionLabel, spacer, scoreLabel, timerLabel);
 
+
+        Image image = new Image(getClass().getResourceAsStream(backgroundImgUrl));
+        BackgroundImage bgImage = new BackgroundImage(
+            image,
+            BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+            BackgroundPosition.DEFAULT,
+            BackgroundSize.DEFAULT
+        );
+
         // Bottom pane for the game
         Pane gamePane = new Pane();
+        gamePane.setBackground(new Background(bgImage));
         canvas = new Canvas(600, 400);
         gc = canvas.getGraphicsContext2D();
         gamePane.getChildren().add(canvas);
@@ -327,8 +347,8 @@ public class App extends Application {
         ball = new Ball(250, 250, 15, 2, 2, 6);
         
         obstacles.clear();
-        obstacles.add(new RectObstacle(100, 50, 100, 150));
-        obstacles.add(new RectObstacle(300, 200, 50, 100));
+        obstacles.add(new RectObstacle(100, 50, 100, 150, wallImgUrl));
+        obstacles.add(new RectObstacle(300, 200, 50, 100, wallImgUrl));
 
     }
 
@@ -337,9 +357,9 @@ public class App extends Application {
         ball = new Ball(250, 250, 15, 2, 2, 6);
 
         obstacles.clear();
-        obstacles.add(new RectObstacle(100, 100, 100, 100));
-        obstacles.add(new RectObstacle(300, 200, 200, 50));
-        obstacles.add(new RectObstacle(200, 300, 100, 30));
+        obstacles.add(new RectObstacle(100, 100, 100, 100, wallImgUrl));
+        obstacles.add(new RectObstacle(300, 200, 200, 50, wallImgUrl));
+        obstacles.add(new RectObstacle(200, 300, 100, 30, wallImgUrl));
 
     }
 
@@ -348,9 +368,9 @@ public class App extends Application {
         ball = new Ball(250, 250, 15, 2, 2, 6);
 
         obstacles.clear();
-        obstacles.add(new RectObstacle(50, 50, 200, 150));
-        obstacles.add(new RectObstacle(400, 100, 50, 250));
-        obstacles.add(new RectObstacle(300, 300, 150, 30));
+        obstacles.add(new RectObstacle(50, 50, 200, 150, wallImgUrl));
+        obstacles.add(new RectObstacle(400, 100, 50, 250, wallImgUrl));
+        obstacles.add(new RectObstacle(300, 300, 150, 30, wallImgUrl));
 
     }
 
@@ -568,8 +588,13 @@ public class App extends Application {
     // Render the game objects
     private void render(GraphicsContext gc) {
         // Clear canvas
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0, 0, 600, 400);
+        if (backgroundImgUrl != null) {
+            Image image = new Image(getClass().getResourceAsStream(backgroundImgUrl));
+            gc.drawImage(image, 0, 0, 600, 400);
+        } else {
+            gc.setFill(Color.GREEN);
+            gc.fillRect(0, 0, 600, 400);
+        }
 
         ball.render(gc);
         
