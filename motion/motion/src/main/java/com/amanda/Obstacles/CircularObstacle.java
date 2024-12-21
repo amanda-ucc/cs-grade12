@@ -1,3 +1,12 @@
+/*
+ * Project Name: Perpetual Accelerated Motion
+ * Author: Amanda Uccello
+ * Date: December 2024
+ * Course: Computer Science
+ * Teacher: Ms. Kim
+ * Description: Concrete class for circular obstacles in the game
+ */
+
 package com.amanda.Obstacles;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -11,6 +20,7 @@ public class CircularObstacle extends AbstractObstacle {
 
     private Paint color = Color.RED; // Color of the circular obstacle
 
+    // Constructors
     public CircularObstacle(double x, double y, double radius) {
         super(x, y);
         this.radius = radius;
@@ -24,6 +34,7 @@ public class CircularObstacle extends AbstractObstacle {
         this.color = color;
     }
 
+    // Getters and Setters
     @Override
     public double getX() {
         return x;

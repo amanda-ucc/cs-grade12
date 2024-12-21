@@ -1,3 +1,12 @@
+/*
+ * Project Name: Perpetual Accelerated Motion
+ * Author: Amanda Uccello
+ * Date: December 2024
+ * Course: Computer Science
+ * Teacher: Ms. Kim
+ * Description: Represents the player ball in the game
+ */
+
 package com.amanda;
 
 import javafx.scene.canvas.GraphicsContext;
