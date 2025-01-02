@@ -4,7 +4,7 @@ public class PartAQuestion1 {
     public static void main(String[] args) {
         // Time check for power function
         int base = 2;
-        int exponent = 50;
+        int exponent = 20;
         long startTime = System.nanoTime();
         int powerResult = power(base, exponent);
         long endTime = System.nanoTime();
