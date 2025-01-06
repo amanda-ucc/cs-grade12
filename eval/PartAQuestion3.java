@@ -1,3 +1,14 @@
+/* 
+ *  Date: 03.01.2025 (Happy New Year!)
+ * 
+ *  Author: Amanda Uccello
+ * 
+ *  Class: ICS4UR-1
+ * 
+ *  Descrption of Class: 
+ *      Converts from prefix to postfix using Stack data structures
+ */
+
 import java.util.HashMap;
 import java.util.Map;
 
