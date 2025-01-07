@@ -5,14 +5,14 @@
  * 
  *  Class: ICS4UR-1
  * 
- *  Descrption of Class: 
+ *  Description of Class: 
  *      Converts from prefix to postfix using Stack data structures
  */
 
 public class PartAQuestion1 {
 
     public static void main(String[] args) {
-        // Time check for power function
+        // Test case 1
         int base = 2;
         int exponent = 20;
         long startTime = System.nanoTime();
@@ -21,6 +21,39 @@ public class PartAQuestion1 {
         long duration = endTime - startTime;
         System.out.println("Power(" + base + ", " + exponent + ") = " + powerResult);
         System.out.println("Execution time for power: " + duration + " nanoseconds");
+
+        // Test case 2
+        base = 0;
+        exponent = 2;
+        startTime = System.nanoTime();
+        powerResult = power(base, exponent);
+        endTime = System.nanoTime();
+        duration = endTime - startTime;
+        System.out.println("Power(" + base + ", " + exponent + ") = " + powerResult);
+        System.out.println("Execution time for power: " + duration + " nanoseconds");
+
+        // Test case 3
+        base = 1;
+        exponent = 0;
+        startTime = System.nanoTime();
+        powerResult = power(base, exponent);
+        endTime = System.nanoTime();
+        duration = endTime - startTime;
+        System.out.println("Power(" + base + ", " + exponent + ") = " + powerResult);
+        System.out.println("Execution time for power: " + duration + " nanoseconds");
+
+        // Test case 4
+        base = -2;
+        exponent = 3;
+        startTime = System.nanoTime();
+        powerResult = power(base, exponent);
+        endTime = System.nanoTime();
+        duration = endTime - startTime;
+        System.out.println("Power(" + base + ", " + exponent + ") = " + powerResult);
+        System.out.println("Execution time for power: " + duration + " nanoseconds");
+
+        // Cannot work with negative exponent as we are using integers
+
     }    
 
     // Part A Question 1 Three Marks 
