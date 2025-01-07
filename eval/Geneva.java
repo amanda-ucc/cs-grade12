@@ -6,7 +6,7 @@
  *  Class: ICS4UR-1
  * 
  *  Descrption of Class: 
- *      Converts from prefix to postfix using Stack data structures
+ *      Geneva Confection problem S3
  */
 
 import java.util.ArrayList;
