@@ -5,21 +5,27 @@
  * 
  *  Class: ICS4UR-1
  * 
- *  Descrption of Class: 
- *      Converts from prefix to postfix using Stack data structures
+ *  Description of Class: 
+ *     Calculates Pascal's Triangle
  */
 
 public class PascalTriangle {
 
     private int [][] pascalArray;
 
+    // Constructors
+    //////////////////////
     public PascalTriangle(int n) {
 
         this.pascalTriangle(n);
 
     }
     
-
+    // Instance methods
+    /////////////////////
+    
+    // returns pascal's triangle in a 2D array of 'n' size
+    // recursive method
     public int [][] pascalTriangle(int n) {
 
         n = n+1;
@@ -37,7 +43,7 @@ public class PascalTriangle {
         return this.pascalArray;
     }
 
-
+    // prints pascal triangle
     public void printPascal() {
         int size = this.pascalArray.length - 1 ;
         System.out.println("Pascal Triangle - PascalTriangle(" + size + ")");
@@ -49,10 +55,8 @@ public class PascalTriangle {
         }
     }
 
-
-    // Static Metods
-    ///////////////////////////////////
-    public static int pascalTriangle(int row, int column) {
+    // calculate the value of the entry (row, column) in pascals triange
+    public int pascalTriangle(int row, int column) {
         if (column == 0 || column == row) {
             return 1;
         } 
@@ -64,15 +68,18 @@ public class PascalTriangle {
         }
     }
 
-    // Static Methods
+
+    // Static Metods
+    ///////////////////////////////////
     public static void main(String[] args) {
 
         // Static Recursive Method
-        System.out.println(pascalTriangle(1,1));
-        System.out.println(pascalTriangle(3,2));
-        System.out.println(pascalTriangle(2,2));
-        System.out.println(pascalTriangle(2,1));
+        PascalTriangle p0 = new PascalTriangle(4);
 
+        System.out.println(p0.pascalTriangle(1,1));
+        System.out.println(p0.pascalTriangle(3,2));
+        System.out.println(p0.pascalTriangle(2,2));
+        System.out.println(p0.pascalTriangle(2,1));
 
         // Test Constructor
         PascalTriangle p1 = new PascalTriangle(3);
@@ -101,6 +108,15 @@ public class PascalTriangle {
 
         System.out.println("p2.pascalTriangle(3)");
         pascalArray = p2.pascalTriangle(3);
+        for (int i = 0; i < pascalArray.length; i++) {
+            for (int j = 0; j < pascalArray[i].length; j++) {
+                System.out.print(pascalArray[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println("p2.pascalTriangle(0)");
+        pascalArray = p2.pascalTriangle(0);
         for (int i = 0; i < pascalArray.length; i++) {
             for (int j = 0; j < pascalArray[i].length; j++) {
                 System.out.print(pascalArray[i][j] + " ");

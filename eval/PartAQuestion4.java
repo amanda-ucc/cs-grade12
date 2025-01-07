@@ -5,16 +5,19 @@
  * 
  *  Class: ICS4UR-1
  * 
- *  Descrption of Class: 
- *      Converts from prefix to postfix using Stack data structures
+ *  Descrpition of Class: 
+ *      Mirrors a string
  */
 
 public class PartAQuestion4 {
     
     public static void main(String[] args) {
         
-        System.out.println(mirror("Go Storm Go!")); // Output: olleH
-
+        System.out.println(mirror("Go Storm Go!")); 
+        System.out.println(mirror("!@#$%^&*()")); 
+        System.out.println(mirror("12345678")); 
+        System.out.println(mirror("H      E     L     L    O")); 
+        System.out.println(mirror("It works!")); 
     }
 
     // Question 4 String Mirror
