@@ -6,25 +6,39 @@
  *  Class: ICS4UR-1
  * 
  *  Descrption of Class: 
- *      Converts from prefix to postfix using Stack data structures
+ *      Converts from prefix to postfix using stack data structures
  */
 
 import java.util.*;
-import java.util.Scanner;
 
 public class PretoPost {
 
-    Scanner scan = new Scanner(System.in);
-    static String sample;
 
     // input numbers to sample
-    public void inputSample() {
-        
-        System.out.println("Please input sample prefix with spaces inbetween: ");
-        sample = scan.nextLine();
-
-        // test cases on sample to determine if its chill
-
+    public static void inputSample() {
+        Scanner scan = new Scanner(System.in);
+        String sample;
+    
+        while (true) {
+            System.out.println("Please input sample prefix with spaces in between (or 'q' to quit): ");
+            sample = scan.nextLine();
+    
+            if (sample.equalsIgnoreCase("q")) {
+                break;
+            }
+    
+            if (sample.matches(".*\\s{2,}.*")) {
+                System.out.println("Input should not have more than one space between characters.");
+            } else if (sample.length() > 1 && !sample.matches("(\\S\\s)*\\S")) {
+                System.out.println("Input should have spaces in between characters.");
+            } else {
+                String result = preToPost(sample);
+                System.out.println("Result: " + result);
+            }
+        }
+    
+        // close scan
+        scan.close();
     }
 
     // find the operator
@@ -95,14 +109,13 @@ public class PretoPost {
 
     }
 
-    
 
+    public static String preToPost(String sample) {
 
-    public static void main(String[] args) {
-
-        // input sample
-        sample = "- - 3 + 2 1 9";
-        System.out.println("Original prefix: " + sample);
+        // determines if sample is 0
+        if (sample.equals("0")) {
+            return "";
+        }
 
         // converts string into a list of characters without spaces
         List<Character> sampleList = convertStringtoList(sample);
@@ -111,10 +124,55 @@ public class PretoPost {
         Stack<String> converted = PretoPost.preToPost(sampleList);
 
         // converts the final postfix stack and turns it into a string with spaces
-        String samplestring = PretoPost.convertStackToString(converted);
-        System.out.println("Final postfix: " + samplestring);
+        String samplestring = PretoPost.convertStackToString(converted);   
+        
+        return samplestring;
+
+    }
+
+    
+    public static void main(String[] args) {
+      
+        // Test 1
+        // input sample
+        System.out.println("\n");
+
+        String sample = "- - 3 + 2 1 9";
+        System.out.println("Original prefix: " + sample);
+
+        String samplestring = preToPost(sample);
+        
+        // prints the output
+        System.out.println("Final postfix:   " + samplestring + "\n");
 
 
+        // Test 2
+        sample = "- 2 2";
+        System.out.println("Original prefix: " + sample);
+        samplestring = preToPost(sample);
+        System.out.println("Final postfix:   " + samplestring + "\n");
+
+        // Test 3
+        sample = "+ 2 - 2 1";
+        System.out.println("Original prefix: " + sample);
+        samplestring = preToPost(sample);
+        System.out.println("Final postfix:   " + samplestring + "\n");
+
+        // Test 4
+        sample = "0";
+        System.out.println("Original prefix: " + sample);
+        samplestring = preToPost(sample);
+        System.out.println("Final postfix:   " + samplestring + "\n");
+
+        // Test 5
+        sample = "1";
+        System.out.println("Original prefix: " + sample);
+        samplestring = preToPost(sample);
+        System.out.println("Final postfix:   " + samplestring + "\n");
+
+
+        // Uncomment if you want to run from the scan
+        // inputSample();
     }
 
 }

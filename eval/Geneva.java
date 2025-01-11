@@ -6,7 +6,7 @@
  *  Class: ICS4UR-1
  * 
  *  Descrption of Class: 
- *      Geneva Confection problem S3
+ *      Geneva confection problem S3
  */
 
 import java.util.ArrayList;
